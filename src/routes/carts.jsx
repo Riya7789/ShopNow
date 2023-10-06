@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 export default function Carts() {
     const [cart, setCart] = useState([]);
 
-    const [cartId, setCartId] = useState(1);
-
   useEffect(() => {
     fetch(`https://dummyjson.com/carts/`)
       .then((res) => res.json())
       .then((data) => {
         setCart(data.carts);
-        console.log(data,"cart");
+        console.log(data,"carts");
       });
   }, []);
 

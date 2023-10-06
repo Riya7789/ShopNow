@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 
@@ -18,11 +18,10 @@ const Cart = () => {
   
   const cartDetail = cart.products && cart.products.map ((carts) =>
     <div>
-        <br/>
-        <li>{carts.title}</li>
-        <li>{carts.price}</li>
-        <li>{carts.quantity}</li>
-        <li>{carts.total}</li>
+        <h3>{carts.title}</h3>
+        <li>Price:{carts.price}</li>
+        <li>Quantity:{carts.quantity}</li>
+        <li>Total:{carts.total}</li>
     </div>
   ); 
 
