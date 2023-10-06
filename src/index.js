@@ -1,42 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import Root from "./routes/root";
+import Header from "./header.jsx";
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import Root from './routes/root';
+import './index.css'
+import Products from './routes/products';
+import Carts from './routes/carts';
 import Product from './routes/product';
-import Cart from './routes/cart';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
-    children: [
+    element: <Root />,
+    children:[
       {
-        path: "products/:productId",
-        element: <Product/>
+        path:"products/",
+        element: <Products />,
       },
       {
-        path: "carts/:cardId",
-        element: <Cart />
+        path:"carts/",
+        element: <Carts/>
       }
-    ],
+    ]
+  },
+  {
+    path: "product/:productId",
+    element: <Product />
   },
 ]);
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-     <RouterProvider router={router} />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    <Header />
+    <RouterProvider router={router} />
+  </React.StrictMode>,
+)

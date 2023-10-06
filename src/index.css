@@ -354,6 +354,10 @@ form[action$="destroy"] button {
   text-align: center;
 }
 
-.contents{
+.content{
   display: flex;
+}
+
+.productDetails{
+  text-align: center;
 }
