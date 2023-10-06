@@ -10,6 +10,7 @@ import './index.css'
 import Products from './routes/products';
 import Carts from './routes/carts';
 import Product from './routes/product';
+import Cart from './routes/cart';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
     path: "product/:productId",
     element: <Product />
   },
+  {
+    path: "cart/:cartId",
+    element: <Cart/>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

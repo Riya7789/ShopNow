@@ -7,22 +7,26 @@ export default function Carts() {
     const [cartId, setCartId] = useState(1);
 
   useEffect(() => {
-    fetch(`https://dummyjson.com/carts/${cartId}`)
+    fetch(`https://dummyjson.com/carts/`)
       .then((res) => res.json())
       .then((data) => {
-        setCart(data);
-        console.log(data);
+        setCart(data.carts);
+        console.log(data,"cart");
       });
-  }, [cartId]);
+  }, []);
+
+  const id = cart.map((carts) => 
+    <div style={{display: 'flex'}}> 
+    <li>{carts.id}</li> &emsp;
+    <Link to = {`/cart/${carts.id}`}> See More</Link>
+    </div>
+
+  );
   
   return(
     <>
       <h2>Carts</h2>
-      <p> ID: {cart.id}</p>
-      <p>TotalQuantity:{cart.totalQuantity}  </p>
-      <p> TotalProducts: {cart.totalProducts} </p>
-      <h2> Total: {cart.total} </h2>
-      <Link to = {`/carts/${cart.id}`}> See More</Link>
+      <p>{id}</p>
     </>
   )
 }
