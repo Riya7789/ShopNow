@@ -9,8 +9,8 @@ import {
 import './index.css'
 import Products from './routes/products';
 import Carts from './routes/carts';
-import Product from './routes/product';
-import Cart from './routes/cart';
+import Product from './routes/productDetails';
+import Cart from './routes/cartDetails';
 
 const router = createBrowserRouter([
   {
