@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Root from "./routes/root";
 import Header from "./header.jsx";
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -11,6 +12,7 @@ import Products from './routes/products';
 import Carts from './routes/carts';
 import Product from './routes/productDetails';
 import Cart from './routes/cartDetails';
+
 
 const router = createBrowserRouter([
   {
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
   {
     path: "cart/:cartId",
     element: <Cart/>
-  }
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -338,3 +338,15 @@ form[action$="destroy"] button {
   text-align: center;
 }
 
+
+.cartDetails{
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+}
+/* .cards{
+  display:flex;
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+} */

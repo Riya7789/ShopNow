@@ -27,13 +27,18 @@ const Cart = () => {
 
   return(
     <div className="cartDetails">
+      <div className="box">
+        <h2><u>Info</u></h2>
         <p>ID: {cartId}</p>
         <p>Total: {cart.total}</p>
         <p>TotalQuantity:{cart.totalQuantity}  </p>
-      <p> TotalProducts: {cart.totalProducts} </p>
-      <p> UserId: {cart.userId} </p>
-      <h2>Details</h2>
-      <p>{cartDetail}</p>
+        <p> TotalProducts: {cart.totalProducts} </p>
+        <p> UserId: {cart.userId} </p>
+      </div>
+      <div className="Details">
+      <h2><u>Details</u></h2>
+        <p>{cartDetail}</p>
+      </div>
     </div>
   )
 }
