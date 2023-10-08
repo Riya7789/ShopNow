@@ -12,6 +12,8 @@ import Products from './routes/products';
 import Carts from './routes/carts';
 import Product from './routes/productDetails';
 import Cart from './routes/cartDetails';
+import LogIn from './login';
+import SignUp from './signup.jsx';
 
 
 const router = createBrowserRouter([
@@ -37,6 +39,15 @@ const router = createBrowserRouter([
     path: "cart/:cartId",
     element: <Cart/>
   },
+  {
+    path: "login",
+    element: <LogIn/>
+  },
+  {
+    path: "signup",
+    element: <SignUp/>
+  },
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

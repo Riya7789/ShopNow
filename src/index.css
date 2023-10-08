@@ -344,9 +344,8 @@ form[action$="destroy"] button {
   display: flex;
   justify-content: space-evenly;
 }
-/* .cards{
-  display:flex;
-  height: 200px;
-  width: 100%;
-  object-fit: cover;
-} */
+
+.btn{
+  display: flex;
+  gap: 15px;
+}
