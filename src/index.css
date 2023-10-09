@@ -326,9 +326,6 @@ form[action$="destroy"] button {
   width: 100%;
 }
 
-.header{
-  text-align: center;
-}
 
 .content{
   display: flex;
@@ -348,4 +345,11 @@ form[action$="destroy"] button {
 .btn{
   display: flex;
   gap: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.color{
+  color: white;
+  text-decoration: none;
 }

@@ -1,14 +1,14 @@
-import { Outlet} from "react-router-dom";
-import Header from "./header";
+import React from 'react'
+import {Outlet, Link} from 'react-router-dom'
 
-export default function Root() {
-    
 
-    return (
-      <>
+export default function Sidebar(){
+
+    return(
+        <>
       
-        <Header/>
-        {/* <div id="sidebar">
+        <div className="content">
+        <div id="sidebar">
           <nav>
             <ul>
               <li>
@@ -19,10 +19,11 @@ export default function Root() {
               </li>
             </ul>
           </nav>
-        </div> */}
+        </div>
         <div id="detail">
             <Outlet />
         </div>
+        </div>
       </>
-    );
-  }
+    )
+}

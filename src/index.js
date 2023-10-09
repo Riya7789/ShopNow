@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Root from "./routes/root";
-import Header from "./header.jsx";
 
 import {
   createBrowserRouter,
@@ -12,8 +11,9 @@ import Products from './routes/products';
 import Carts from './routes/carts';
 import Product from './routes/productDetails';
 import Cart from './routes/cartDetails';
-import LogIn from './login';
-import SignUp from './signup.jsx';
+import LogIn from './routes/login';
+import SignUp from './routes/signup.jsx';
+import Sidebar from './routes/sidebar';
 
 
 const router = createBrowserRouter([
@@ -22,37 +22,47 @@ const router = createBrowserRouter([
     element: <Root />,
     children:[
       {
-        path:"products/",
-        element: <Products />,
+        path: "/",
+        element: <Sidebar />,
+        children:[
+          {
+            path:"/",
+            element:<Products />
+          },
+          {
+            path:"products/",
+            element: <Products />,
+          },
+          {
+            path:"carts/",
+            element: <Carts/>
+          }
+
+        ]
       },
-      {
-        path:"carts/",
-        element: <Carts/>
-      }
-    ]
-  },
-  {
-    path: "product/:productId",
-    element: <Product />
-  },
-  {
-    path: "cart/:cartId",
-    element: <Cart/>
-  },
-  {
-    path: "login",
-    element: <LogIn/>
-  },
-  {
-    path: "signup",
-    element: <SignUp/>
-  },
-  
+          {
+            path:"login/",
+            element: <LogIn />
+          },
+          {
+            path:"signup/",
+            element: <SignUp/>
+          },
+          {
+            path: "product/:productId",
+            element: <Product />
+          },
+          {
+            path: "cart/:cartId",
+            element: <Cart/>
+          },        
+        ],
+
+      },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Header />
     <RouterProvider router={router} />
   </React.StrictMode>,
 )
