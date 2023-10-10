@@ -21,6 +21,7 @@ export default function Products() {
     // const [carts, setCarts] = useState([]);
     const  handleClick  = (product) => {
       dispatch(addToCart(product));
+      console.log("product add to cart successfully!");
       // setCarts([...carts, product.title]);
     }
 

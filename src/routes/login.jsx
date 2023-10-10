@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
+
 
 function Copyright(props) {
   return (
@@ -31,6 +33,8 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function LogIn() {
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -38,7 +42,32 @@ export default function LogIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    localStorage.email = data.get('email');
+    localStorage.password = data.get('password');
+
+    fetch('https://dummyjson.com/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+    
+      username: data.get('email'),
+      password: data.get('password'),
+    // expiresInMins: 60, // optional
+      })
+    })
+    .then(res => res.json())
+    .then((data) =>{      
+      console.log(data.token)
+      localStorage.token = data.token; 
+    }
+    );
+    console.log('Api called');
+
   };
+  
+  
+   
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -68,6 +97,9 @@ export default function LogIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              //default value
+              value= 'kminchelle'
+
             />
             <TextField
               margin="normal"
@@ -78,12 +110,13 @@ export default function LogIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value= '0lelplR'
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
+            <Button 
               type="submit"
               fullWidth
               variant="contained"

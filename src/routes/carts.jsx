@@ -6,8 +6,8 @@ import { CardActionArea } from '@mui/material';
 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
 import { removeFromCart } from './cartSlice';
 
 export default function Carts() {
@@ -39,6 +39,7 @@ export default function Carts() {
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
             {/* <p>{carts.id}</p> */}
+            <p>{cart.title}</p>
             <img 
               src={cart.thumbnail} 
               alt="product" 
