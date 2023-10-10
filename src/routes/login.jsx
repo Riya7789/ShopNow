@@ -12,8 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useState } from 'react';
 
+import { useState, useEffect } from 'react';
 
 function Copyright(props) {
   return (
@@ -34,7 +34,18 @@ const defaultTheme = createTheme();
 
 export default function LogIn() {
 
-
+  const[isLoggedIn, setLoggedIn] = useState(false);
+  
+  
+  useEffect = (() => {
+    const token = localStorage.getItem("token");
+    if (token){
+      setLoggedIn(true);
+    } else{
+      setLoggedIn(false);
+    }
+  },[]);
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -43,8 +54,18 @@ export default function LogIn() {
       password: data.get('password'),
     });
 
-    localStorage.email = data.get('email');
-    localStorage.password = data.get('password');
+
+    function login(){
+      localStorage.setItem("token","user-token");
+      setLoggedIn(true);
+    }
+    
+    function logout(){
+      localStorage.removeItem("token");
+      setLoggedIn(false);
+    }
+    // localStorage.email = data.get('email');
+    // localStorage.password = data.get('password');
 
     fetch('https://dummyjson.com/auth/login', {
       method: 'POST',
@@ -58,17 +79,16 @@ export default function LogIn() {
     })
     .then(res => res.json())
     .then((data) =>{      
-      console.log(data.token)
-      localStorage.token = data.token; 
+      // localStorage.token = data.token; 
+      localStorage.setItem('token','user-token'); 
+      console.log(data.token);
     }
     );
+    alert('Login Successfully!!');
     console.log('Api called');
 
   };
   
-  
-   
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -116,14 +136,27 @@ export default function LogIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button 
+            <>
+            {isLoggedIn ? (
+              <Button onClick={login}
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Log In
+              Log In 
             </Button>
+            ):
+            (<Button onClick={logout}
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Log Out
+            </Button>)}
+            
+            </>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -141,5 +174,6 @@ export default function LogIn() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+
   );
 }
