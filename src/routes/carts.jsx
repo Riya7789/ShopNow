@@ -32,25 +32,25 @@ export default function Carts() {
 
 
 
-  const id = carts.map((carts) => 
-  <div key={carts.id} style={{ width: '30%', padding: '10px' }} >
+  const id = carts.map((cart) => 
+  <div key={cart.id} style={{ width: '30%', padding: '10px' }} >
     <Card sx={{ maxWidth: 350, height:'100%' }}>
     <CardActionArea>
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
             {/* <p>{carts.id}</p> */}
             <img 
-              src={carts.thumbnail} 
+              src={cart.thumbnail} 
               alt="product" 
               style={{height:'250' ,width:'100%', objectFit:"cover"}}
             />  
 
             </Typography>
-              <Link to = {`/cart/${carts.id}`}> See More</Link>
+              {/* <Link to = {`/cart/${cart.id}`}> See More</Link> */}
               <button onClick={() => {
-                onClickRemove(carts.id);
+                onClickRemove(cart);
               }}>
-                Remove</button>
+                Remove Cart</button>
           </CardContent>
         </CardActionArea>
     </Card>
