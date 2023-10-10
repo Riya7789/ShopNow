@@ -4,35 +4,57 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
+
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { removeFromCart } from './cartSlice';
 
 export default function Carts() {
-    const [cart, setCart] = useState([]);
+    // const [cart, setCart] = useState([]);
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    fetch(`https://dummyjson.com/carts/`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCart(data.carts);
-        console.log(data,"carts");
-      });
-  }, []);
+    const carts = useSelector((state) => state.cart.carts);
+   
+    const onClickRemove = (cartId) => {
+      dispatch(removeFromCart(cartId));
+      console.log("Remove Successfully");
+    };
 
-  const id = cart.map((carts) => 
+  // useEffect(() => {
+  //   fetch(`https://dummyjson.com/carts/`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCart(data.carts);
+  //       console.log(data,"carts");
+  //     });
+  // }, []);
+
+
+
+  const id = carts.map((carts) => 
   <div key={carts.id} style={{ width: '30%', padding: '10px' }} >
     <Card sx={{ maxWidth: 350, height:'100%' }}>
     <CardActionArea>
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
-              {carts.id}
+            {/* <p>{carts.id}</p> */}
+            <img 
+              src={carts.thumbnail} 
+              alt="product" 
+              style={{height:'250' ,width:'100%', objectFit:"cover"}}
+            />  
+
             </Typography>
               <Link to = {`/cart/${carts.id}`}> See More</Link>
+              <button onClick={() => {
+                onClickRemove(carts.id);
+              }}>
+                Remove</button>
           </CardContent>
         </CardActionArea>
     </Card>
     </div>
-
   );
   
   return(
@@ -40,6 +62,7 @@ export default function Carts() {
       <Typography variant="h4" component="h1" gutterBottom>
         Carts
       </Typography>
+        <p>Total number of carts added:{carts.length}</p>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {id}
       </div>

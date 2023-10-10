@@ -15,6 +15,8 @@ import LogIn from './routes/login';
 import SignUp from './routes/signup.jsx';
 import Sidebar from './routes/sidebar';
 
+import store from './store'
+import { Provider } from 'react-redux'
 
 const router = createBrowserRouter([
   {
@@ -27,11 +29,15 @@ const router = createBrowserRouter([
         children:[
           {
             path:"/",
-            element:<Products />
+            element:<Products />,
           },
           {
             path:"products/",
             element: <Products />,
+          },
+          {
+            path: "product/:productId",
+            element: <Product />
           },
           {
             path:"carts/",
@@ -49,10 +55,6 @@ const router = createBrowserRouter([
             element: <SignUp/>
           },
           {
-            path: "product/:productId",
-            element: <Product />
-          },
-          {
             path: "cart/:cartId",
             element: <Cart/>
           },        
@@ -62,7 +64,10 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+  </Provider>,
   </React.StrictMode>,
 )
