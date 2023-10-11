@@ -37,7 +37,7 @@ export default function LogIn() {
   const[isLoggedIn, setLoggedIn] = useState(false);
   
   
-  useEffect = (() => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
     if (token){
       setLoggedIn(true);
@@ -46,6 +46,11 @@ export default function LogIn() {
     }
   },[]);
   
+  function logout(){
+    localStorage.removeItem("token");
+    setLoggedIn(false);
+  }
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -53,19 +58,6 @@ export default function LogIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
-
-
-    function login(){
-      localStorage.setItem("token","user-token");
-      setLoggedIn(true);
-    }
-    
-    function logout(){
-      localStorage.removeItem("token");
-      setLoggedIn(false);
-    }
-    // localStorage.email = data.get('email');
-    // localStorage.password = data.get('password');
 
     fetch('https://dummyjson.com/auth/login', {
       method: 'POST',
@@ -79,9 +71,8 @@ export default function LogIn() {
     })
     .then(res => res.json())
     .then((data) =>{      
-      // localStorage.token = data.token; 
-      localStorage.setItem('token','user-token'); 
-      console.log(data.token);
+        localStorage.setItem("token","user-token");
+        setLoggedIn(true);
     }
     );
     alert('Login Successfully!!');
@@ -89,8 +80,17 @@ export default function LogIn() {
 
   };
   
-  return (
-    <ThemeProvider theme={defaultTheme}>
+  return (<>
+    {isLoggedIn ?
+     (<Button onClick={logout}
+      type="submit"
+      fullWidth
+      variant="contained"
+      sx={{ mt: 3, mb: 2 }}
+    >
+      Log Out
+    </Button>):(
+      <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -136,27 +136,14 @@ export default function LogIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <>
-            {isLoggedIn ? (
-              <Button onClick={login}
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Log In 
-            </Button>
-            ):
-            (<Button onClick={logout}
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Log Out
-            </Button>)}
-            
-            </>
+
+              <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+              > Login
+              </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -174,6 +161,10 @@ export default function LogIn() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+    )
+    }
+  </>
+    
 
   );
 }
