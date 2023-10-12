@@ -10,7 +10,7 @@ import {Button} from '@mui/material';
 import {Link} from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import {addToCart} from './cartSlice';
+import {addToCart} from '../reducers/cartSlice';
 export default function Products() {
     const [products, setProducts] = useState([]);
     const dispatch = useDispatch();

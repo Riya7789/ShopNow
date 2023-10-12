@@ -8,7 +8,7 @@ import { CardActionArea } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 // import { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
-import { removeFromCart } from './cartSlice';
+import { removeFromCart } from '../reducers/cartSlice';
 
 export default function Carts() {
     // const [cart, setCart] = useState([]);

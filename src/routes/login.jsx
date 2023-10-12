@@ -12,9 +12,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, logout } from './loginSlice';
+import { login, logout } from '../reducers/loginSlice';
+
+// import { setProfile, clearProfile } from '../reducers/profileSlice';
 import { Navigate } from "react-router-dom";
 
 function Copyright(props) {
@@ -32,6 +34,8 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 export default function Login() {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+  
+  
   const dispatch = useDispatch();
 
   function Logout(){
@@ -53,14 +57,30 @@ export default function Login() {
   .then(res => res.json())
   .then((data) => {
     console.log(data);
-    //
     localStorage.setItem("token", data.token);
-    dispatch(login({token: data.token}));
+    localStorage.setItem("id", data.id);
+    localStorage.setItem("username", data.username);
+    localStorage.setItem("email", data.email);
+    localStorage.setItem("firstName", data.firstName);
+    localStorage.setItem("lastName", data.lastName);
+    localStorage.setItem("gender", data.gender);
+    localStorage.setItem("image", data.image);
+   
+   //state update
+    dispatch(login({
+          token: data.token,
+          id: data.id,
+          username: data.username,
+          email: data.email,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          gender:data.gender,
+          image: data.image}));
   })
   };
   return (<>
   {isLoggedIn ? (
-        <Navigate to="/" replace={true} />
+        <Navigate to="/profile" replace={true} />
   ) : (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
