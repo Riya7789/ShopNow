@@ -34,7 +34,7 @@ const Profile = () => {
         </p>
         <b>
         Image:
-        <img src={image} />
+        <img src={image} alt=""/>
         </b>
          
        

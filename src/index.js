@@ -15,6 +15,7 @@ import LogIn from './routes/login';
 import SignUp from './routes/signup.jsx';
 import Sidebar from './routes/sidebar';
 import Profile from './routes/userProfile';
+import Category from './routes/category';
 
 import store from './store'
 import { Provider } from 'react-redux'
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Sidebar />,
         children:[
+          {
+            path:"categories/:categoryID",
+            element:<Category />,
+          },
           {
             path:"/",
             element:<Products />,
