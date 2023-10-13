@@ -1,83 +1,84 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Root from "./routes/root";
+import Root from './routes/root'
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
-import Products from './routes/products';
-import Carts from './routes/carts';
-import Product from './routes/productDetails';
-import Cart from './routes/cartDetails';
-import LogIn from './routes/login';
-import SignUp from './routes/signup.jsx';
-import Sidebar from './routes/sidebar';
-import Profile from './routes/userProfile';
-import Category from './routes/category';
+import Products from './routes/products'
+import Carts from './routes/carts'
+import Product from './routes/productDetails'
+import Cart from './routes/cartDetails'
+import LogIn from './routes/login'
+import SignUp from './routes/signup.jsx'
+import Sidebar from './routes/sidebar'
+import Profile from './routes/userProfile'
+import Category from './routes/category'
 
 import store from './store'
 import { Provider } from 'react-redux'
+import SearchBar from './routes/searchBar'
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    children:[
-      {
-        path: "/",
-        element: <Sidebar />,
-        children:[
-          {
-            path:"categories/:categoryID",
-            element:<Category />,
-          },
-          {
-            path:"/",
-            element:<Products />,
-          },
-          {
-            path:"products/",
-            element: <Products />,
-          },
-          {
-            path: "product/:productId",
-            element: <Product />
-          },
-          {
-            path:"carts/",
-            element: <Carts/>
-          }
+    {
+        path: '/',
+        element: <Root />,
+        children: [
+            {
+                path: '/',
+                element: <Sidebar />,
+                children: [
+                    {
+                        path: 'categories/:categoryID',
+                        element: <Category />,
+                    },
+                    {
+                        path: '/',
+                        element: <Products />,
+                    },
 
-        ]
-      },
-          {
-            path:"login/",
-            element: <LogIn />
-          },
-          {
-            path:"signup/",
-            element: <SignUp/>
-          },
-          {
-            path: "cart/:cartId",
-            element: <Cart/>
-          },   
-          {
-            path:'/profile',
-            element:<Profile/>
-          }     
+                    {
+                        path: 'products/',
+                        element: <Products />,
+                    },
+                    {
+                        path: 'product/:productId',
+                        element: <Product />,
+                    },
+                    {
+                        path: 'carts/',
+                        element: <Carts />,
+                    },
+                ],
+            },
+            {
+                path: 'login/',
+                element: <LogIn />,
+            },
+            {
+                path: 'signup/',
+                element: <SignUp />,
+            },
+            {
+                path: 'cart/:cartId',
+                element: <Cart />,
+            },
+            {
+                path: '/profile',
+                element: <Profile />,
+            },
+            {
+              path: 'search/',
+              element: <SearchBar />
+            }
         ],
-
-      },
-]);
+    },
+])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-  </Provider>,
-  </React.StrictMode>,
+    <React.StrictMode>
+        <Provider store={store}>
+            <RouterProvider router={router} />
+        </Provider>
+        ,
+    </React.StrictMode>
 )
